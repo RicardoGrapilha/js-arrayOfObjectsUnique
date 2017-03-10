@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var  array = [];
+	array.push({
+		id: "15223",
+		tipo: "Motoniveladora",
+		modelo: "7D"
+	},
+	{
+		id: "15224",
+		tipo: "Retroescavadeira",
+		modelo: "F740"
+	},
+	{
+		id: "15224",
+		tipo: "Retroescavadeira",
+		modelo: "F740"
+	});
+	console.log("array zuado FDP: ", array);
+	var uniqueArray = array.filter( function( elem, index, _array ) {
+	    return _array.indexOf( elem ) === index;
+	} );
+	console.log("array unico FDP: ", uniqueArray);
+
+</script>
+</html>
