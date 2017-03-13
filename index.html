@@ -1,33 +1,66 @@
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
 <head>
-	<title></title>
+	<title>List array unique</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" >
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" >
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="bootstrap/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="js/pokemons.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
-
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Array with duplicate objects</h3>
+			<ul id="array_main" class="list-group"></ul>
+		</div>
+		<div class="col-md-6">
+			<h3>Array without duplicate objects</h3>
+			<ul id="array_unique" class="list-group"></ul>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
-	var  array = [];
-	array.push({
-		id: "15223",
-		tipo: "Motoniveladora",
-		modelo: "7D"
-	},
-	{
-		id: "15224",
-		tipo: "Retroescavadeira",
-		modelo: "F740"
-	},
-	{
-		id: "15224",
-		tipo: "Retroescavadeira",
-		modelo: "F740"
-	});
-	console.log("array zuado FDP: ", array);
-	var uniqueArray = array.filter( function( elem, index, _array ) {
-	    return _array.indexOf( elem ) === index;
-	} );
-	console.log("array unico FDP: ", uniqueArray);
+	//var pokemons in js/pokemons.js
+	var  array_main = JSON.parse(pokemons);
 
+	console.log("Array with repeated data: ", array_main);
+	//utils
+	insert_array_html(array_main, "array_main");
+	var uniqueArray = [];
+	//Filter this zuado array
+	array_main.filter( function( elem_main, index_main ) {
+		//Insert data into array so it is not empty
+		if(index_main === 0){
+			uniqueArray.push(elem_main);
+		}
+		//Lists all the data within the array
+		var obj_exists = false;
+		uniqueArray.forEach(function(elem_unique, index_unique, arr_unique){
+			//Compares elements of the main array, with the unique array
+			//utils
+			if(! Object.compare(elem_main, elem_unique ) ){
+				//Gambiarra time hehehe
+				//Check if the last element of the unique array,
+				// if it is then can insert because there is no such element in the unique array.
+				if( index_unique === uniqueArray.length -1 && ! obj_exists){
+					uniqueArray.push(elem_main);
+				}
+			}else{
+				//If there is a crash outside ForEach
+				obj_exists = true;
+				return false;
+			}
+		});
+	} );
+	console.log("Array without repeated data: ", uniqueArray);
+	insert_array_html(uniqueArray, "array_unique");
 </script>
+
 </html>
